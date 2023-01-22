@@ -1,7 +1,0 @@
-const sheets = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1qxOr7phsRX6blLVRsg0rh3XeP77dom93GoyViBef6OY/edit?usp=sharing");
-const sheet = sheets.getSheetByName("Sheet1");
-function doPost(e){
-  let data = e.parameter;
-  sheet.appendRow([data.name,data.dateofbirth,data.email,data.phone,data.country]);
-  return ContentService.createTextOutput("Success");
-}
