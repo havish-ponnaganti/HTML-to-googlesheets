@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML form to Google Sheet</title>
+</head>
+<body>
+    <h1 id="msg"></h1>
+    <h4><i>GoogleSheet is the <a href="https://docs.google.com/spreadsheets/d/1qxOr7phsRX6blLVRsg0rh3XeP77dom93GoyViBef6OY/edit?usp=sharing" > DataBase</a> of this HTML form</i></h4>
+    <form>
+        <input type="text" name="name" placeholder='your name'><br><br>
+        <input type="text" name="dateofbirth" placeholder='your date of birth'><br><br>
+        <input type="email" name="email" placeholder='your email'><br><br>
+        <input type="tel" name="phone" placeholder='your phone number'><br><br>
+        <input type="text" name="country" placeholder='Country you live in'><br><br>
+        <input type="submit" id="sub">
+    </form>
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.querySelector("#sub").value = "Submiting....";
+            let data = new FormData(form);
+            fetch('https://script.google.com/macros/s/AKfycbw7X07xa9FF0WObq6FRXI9sAU1cgTymvwniKZbfjQYLI1wh4wQGdjB8rRCf40uliK1H/exec', {
+                    method: "POST",
+                    body: data
+                })
+                .then(res => res.text())
+                .then(data => {
+                    document.querySelector("#msg").innerHTML = data;
+                    document.querySelector("#sub").value = "Submit"
+                });
+        })
+    </script>
+</body>
+</html>
